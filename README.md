@@ -1,6 +1,14 @@
 # Holycross College Website
 
-## Project Output
+
+🌐 Project Output (Live Demo)
+
+🔗 Live Website:
+👉 https://holycrossjrcollege.vercel.app/
+
+
+📸 Website Preview
+
 <img width="1914" height="900" alt="Screenshot 2026-01-05 142042" src="https://github.com/user-attachments/assets/1cad6cf5-b69c-4d1f-9a60-5cff295f62e3" />
 
 ## 📖 Project Description
