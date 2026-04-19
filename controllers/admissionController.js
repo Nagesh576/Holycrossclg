@@ -1,4 +1,5 @@
 const Admission = require('../models/Admission');
+const fs = require('fs');
 
 // @desc    GET all admission submissions
 // @route   GET /api/admission
@@ -25,8 +26,9 @@ const createAdmission = async (req, res, next) => {
             throw new Error('Please upload your 10th marksheet');
         }
 
-        // Save just the relative 'uploads' path to the database
-        const marksheetPath = 'uploads/' + req.file.filename;
+        // Convert the temporary image to Base64 so it persists on Vercel without a disk Drive
+        const fileBuffer = fs.readFileSync(req.file.path);
+        const marksheetPath = `data:${req.file.mimetype};base64,${fileBuffer.toString('base64')}`;
 
         if (!name || !email || !phone || !gender || !dob || !course) {
             res.status(400);

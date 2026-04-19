@@ -114,9 +114,11 @@ function populateAdmissions(admissions) {
             <td>${a.course}</td>
             <td>${a.gender}</td>
             <td>
-                ${srcPath.match(/\.(jpeg|jpg|gif|png)$/i) 
-                    ? `<a href="/${srcPath}" target="_blank"><img src="/${srcPath}" alt="Marksheet" class="preview-img"></a>` 
-                    : `<a href="/${srcPath}" target="_blank" style="font-weight: bold; color: var(--primary);">View File</a>`
+                ${srcPath.startsWith('data:image') 
+                    ? `<a href="${srcPath}" download="marksheet"><img src="${srcPath}" alt="Marksheet" class="preview-img"></a>`
+                    : srcPath.match(/\.(jpeg|jpg|gif|png)$/i) 
+                        ? `<a href="/${srcPath}" target="_blank"><img src="/${srcPath}" alt="Marksheet" class="preview-img"></a>` 
+                        : `<a href="/${srcPath}" target="_blank" style="font-weight: bold; color: var(--primary);">View File</a>`
                 }
             </td>
             <td>${new Date(a.createdAt).toLocaleString()}</td>

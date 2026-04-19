@@ -7,16 +7,12 @@ const fs = require('fs');
 const { getAdmissions, createAdmission, updateAdmission, deleteAdmission } = require('../controllers/admissionController');
 const { protect } = require('../middleware/authMiddleware');
 
-// Ensure uploads folder exists
-const uploadDir = path.join(__dirname, '../uploads');
-if (!fs.existsSync(uploadDir)) {
-    fs.mkdirSync(uploadDir);
-}
+const os = require('os');
 
 // Setup multer storage
 const storage = multer.diskStorage({
     destination: function(req, file, cb) {
-        cb(null, uploadDir);
+        cb(null, os.tmpdir());
     },
     filename: function(req, file, cb) {
         cb(null, Date.now() + path.extname(file.originalname));
