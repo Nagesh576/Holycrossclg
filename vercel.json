@@ -28,8 +28,16 @@
       "dest": "/server.js"
     },
     {
-      "src": "/(.*)",
-      "dest": "/$1"
+      "src": "/admin",
+      "dest": "/admin.html"
+    },
+    {
+      "src": "/Admission_page",
+      "dest": "/Admission_page.html"
+    },
+    {
+      "src": "/Contact_page",
+      "dest": "/Contact_page.html"
     }
   ]
 }
