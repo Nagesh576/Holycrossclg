@@ -1,0 +1,37 @@
+const express = require('express');
+const router = express.Router();
+const multer = require('multer');
+const path = require('path');
+const fs = require('fs');
+
+const { getAdmissions, createAdmission, updateAdmission, deleteAdmission } = require('../controllers/admissionController');
+const { protect } = require('../middleware/authMiddleware');
+
+// Ensure uploads folder exists
+const uploadDir = path.join(__dirname, '../uploads');
+if (!fs.existsSync(uploadDir)) {
+    fs.mkdirSync(uploadDir);
+}
+
+// Setup multer storage
+const storage = multer.diskStorage({
+    destination: function(req, file, cb) {
+        cb(null, uploadDir);
+    },
+    filename: function(req, file, cb) {
+        cb(null, Date.now() + path.extname(file.originalname));
+    }
+});
+
+const upload = multer({ storage: storage });
+
+// Routes
+router.route('/')
+    .get(protect, getAdmissions)
+    .post(upload.single('file'), createAdmission);
+
+router.route('/:id')
+    .put(protect, updateAdmission)
+    .delete(protect, deleteAdmission);
+
+module.exports = router;

@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard - Holy Cross College</title>
+    <link rel="shortcut icon" href="images\clglogo.png" type="image/png">
+    <link rel="stylesheet" href="css/admission_style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <style>
+        .hidden { display: none !important; }
+        .dashboard-container {
+            width: 100%;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .dashboard-wrap {
+            width: 95%;
+            max-width: 1200px;
+            background: var(--tra);
+            padding: 40px;
+            border-radius: 5px;
+            margin-bottom: 50px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+        }
+        .dashboard-wrap h2 { margin-top: 30px; margin-bottom: 10px; font-family: bold; color: var(--primary); }
+        .dashboard-wrap h1 { text-align: center; font-family: bold; font-size: 32px; color: var(--primary); margin-bottom: 20px;}
+        table { width: 100%; border-collapse: collapse; margin-top: 10px; font-family: sans-serif; background: var(--white); border-radius: 5px; overflow: hidden; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+        table, th, td { border: 1px solid var(--bordcolor); }
+        th, td { padding: 15px; text-align: left; }
+        th { background-color: var(--primary); color: var(--white); font-weight: bold; text-transform: uppercase; font-size: 13px;}
+        td { color: var(--text-clr); font-size: 14px; }
+        
+        .logout-btn { padding: 10px 25px; background-color: var(--btn-hvr); color: var(--white); border: none; cursor: pointer; float: right; border-radius: 3px; font-weight: bold; transition: 0.3s; }
+        .logout-btn:hover { background-color: #ff0000; }
+        
+        /* Table Image Preview Enhance */
+        .preview-img { max-height: 60px; max-width: 60px; border-radius: 4px; border: 2px solid var(--bordcolor); transition: transform 0.3s; }
+        .preview-img:hover { transform: scale(1.5); }
+    </style>
+</head>
+<body>
+    <div class="background" style="background: url('images/bg.jpg') no-repeat center center fixed; background-size: cover; min-height: 100vh;">
+        <section class="header" style="min-height: auto;">
+            <nav>
+                <a href="index.html"><img src="images\clglogo.png" id="logo-img"></a>
+                <div class="nav-links" id="navLinks">
+                    <span class="icon" onclick="hidemenu()">&#10005;</span>  
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="Admission_page.html">Admission</a></li>
+                        <li><a href="index.html#course_call">Course</a></li>
+                        <li><a href="Contact_page.html">Contact</a></li>
+                    </ul>
+                </div> 
+                <span class="icon" onclick="showmenu()">&#9776;</span>
+            </nav>
+
+            <!-- Login Section -->
+            <div id="loginSection" class="wrapper">
+                <div class="r_form_wrap">
+                    <div class="title">
+                        <p>Admin Login</p>
+                    </div>
+                    <div class="r_form">
+                        <div id="loginError" style="color: red; margin-bottom: 20px; text-align: center; font-weight: bold;"></div>
+                        <div class="input_wrap">
+                            <label for="adminEmail">Email Address</label>
+                            <div class="input_item">
+                                <i class="fa fa-envelope" id="icon"></i>
+                                <input type="email" id="adminEmail" class="input" placeholder="Enter Admin Email" required>
+                            </div>
+                        </div>
+                        <div class="input_wrap">
+                            <label for="adminPassword">Password</label>
+                            <div class="input_item">
+                                <i class="fa fa-key" id="icon"></i>
+                                <input type="password" id="adminPassword" class="input" placeholder="Enter Password" required>
+                            </div>
+                        </div>
+                        <button onclick="handleLogin()" class="button">Secure Login</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Dashboard Section -->
+            <div id="dashboardSection" class="dashboard-container hidden">
+                <div class="dashboard-wrap">
+                    <button class="logout-btn" onclick="handleLogout()">Logout</button>
+                    <h1>Admin Dashboard</h1>
+                    
+                    <h2>Contact Submissions</h2>
+                    <div style="overflow-x:auto;">
+                        <table id="contactTable">
+                            <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Email</th>
+                                    <th>Message/Phone</th>
+                                    <th>Date</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody></tbody>
+                        </table>
+                    </div>
+
+                    <h2>Admission Applications</h2>
+                    <div style="overflow-x:auto;">
+                        <table id="admissionTable">
+                            <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Email</th>
+                                    <th>Phone</th>
+                                    <th>Course</th>
+                                    <th>Gender</th>
+                                    <th>Marksheet File</th>
+                                    <th>Date</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody></tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Edit Contact Modal -->
+            <div id="editContactModal" class="dashboard-container hidden" style="position:fixed; top:0; left:0; right:0; bottom:0; background:rgba(0,0,0,0.8); z-index:9999; overflow-y:auto; padding-top: 50px;">
+                <div class="dashboard-wrap r_form_wrap" style="width: 500px !important;">
+                    <span class="icon" style="display:block; color:white; float:right; cursor:pointer;" onclick="closeModals()">&#10005;</span>
+                    <h2 style="text-align: center;">Edit Contact</h2>
+                    <div class="r_form">
+                        <input type="hidden" id="editContactId">
+                        <div class="input_wrap">
+                            <label>Name</label><input type="text" id="editContactName" class="input">
+                        </div>
+                        <div class="input_wrap">
+                            <label>Email</label><input type="email" id="editContactEmail" class="input">
+                        </div>
+                        <div class="input_wrap">
+                            <label>Message</label><input type="text" id="editContactPhone" class="input">
+                        </div>
+                        <button onclick="saveContactEdit()" class="button" style="margin-top: 20px;">Save Changes</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Edit Admission Modal -->
+            <div id="editAdmissionModal" class="dashboard-container hidden" style="position:fixed; top:0; left:0; right:0; bottom:0; background:rgba(0,0,0,0.8); z-index:9999; overflow-y:auto; padding-top: 50px;">
+                <div class="dashboard-wrap r_form_wrap" style="width: 500px !important;">
+                    <span class="icon" style="display:block; color:white; float:right; cursor:pointer;" onclick="closeModals()">&#10005;</span>
+                    <h2 style="text-align: center;">Edit Admission</h2>
+                    <div class="r_form">
+                        <input type="hidden" id="editAdmissionId">
+                        <div class="input_wrap">
+                            <label>Name</label><input type="text" id="editAdmissionName" class="input">
+                        </div>
+                        <div class="input_wrap">
+                            <label>Email</label><input type="email" id="editAdmissionEmail" class="input">
+                        </div>
+                        <div class="input_wrap">
+                            <label>Phone</label><input type="text" id="editAdmissionPhone" class="input">
+                        </div>
+                        <div class="input_wrap">
+                            <label>Course</label><input type="text" id="editAdmissionCourse" class="input">
+                        </div>
+                        <button onclick="saveAdmissionEdit()" class="button" style="margin-top: 20px;">Save Changes</button>
+                    </div>
+                </div>
+            </div>
+
+        </section>
+        <div class="none_div"></div>
+    </div>
+
+    <script src="javascript/admin.js"></script>
+    <script>
+        var navLinks= document.getElementById("navLinks");
+        function showmenu(){
+            navLinks.style.right="0";
+        }   
+        function hidemenu(){
+            navLinks.style.right="-200px";
+        }
+    </script>
+</body>
+</html>
