@@ -35,6 +35,195 @@
         </div>
     </section>
 
+    <!--Highlights / Gallery Section-->
+    <section class="highlights">
+        <div class="marquee-container">
+            <div class="marquee-content">
+                <img src="images/toppers-banner.jpeg" alt="Intermediate Toppers 2026">
+                <img src="images/group-photo.jpeg" alt="Staff and students">
+                <img src="images/christmas-event.jpeg" alt="Christmas celebration">
+                <img src="images/teachers-day.jpeg" alt="Teachers Day">
+                <img src="images/girls-group.jpeg" alt="Girls students group">
+                <!-- Duplicate for seamless looping -->
+                <img src="images/toppers-banner.jpeg" alt="Intermediate Toppers 2026">
+                <img src="images/group-photo.jpeg" alt="Staff and students">
+                <img src="images/christmas-event.jpeg" alt="Christmas celebration">
+                <img src="images/teachers-day.jpeg" alt="Teachers Day">
+                <img src="images/girls-group.jpeg" alt="Girls students group">
+            </div>
+        </div>
+    </section>
+
+    <style>
+        .highlights {
+            width: 100%;
+            padding: 40px 0;
+            background: #fff;
+            margin-top: 10px;
+        }
+        .marquee-container {
+            width: 90%;
+            margin: auto;
+            overflow: hidden;
+            white-space: nowrap;
+            position: relative;
+        }
+        .marquee-content {
+            display: inline-block;
+            animation: scrollMarquee 25s linear infinite;
+        }
+        .marquee-content:hover {
+            animation-play-state: paused;
+        }
+        .marquee-content img {
+            height: 220px;
+            margin: 0 15px;
+            border-radius: 12px;
+            object-fit: cover;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.15);
+            transition: transform 0.3s ease;
+            cursor: pointer;
+        }
+        .marquee-content img:hover {
+            transform: scale(1.05);
+        }
+        @keyframes scrollMarquee {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+        @media(max-width: 768px) {
+            .marquee-content img {
+                height: 140px;
+                margin: 0 10px;
+            }
+        }
+    </style>
+
+    <!-- About, Vision & Mission Section -->
+    <section class="about-vision-mission">
+        <div class="avm-container">
+            <div class="avm-row">
+                <!-- About Us -->
+                <div class="avm-card">
+                    <div class="avm-icon-wrapper about-icon">
+                        <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+                    </div>
+                    <h3>About Us</h3>
+                    <p>Holy Cross Junior College is committed to providing a transformative educational experience. We nurture young minds with a robust academic foundation, instilling moral values and fostering holistic development to prepare future leaders.</p>
+                </div>
+                
+                <!-- Vision -->
+                <div class="avm-card">
+                    <div class="avm-icon-wrapper vision-icon">
+                        <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><circle cx="12" cy="12" r="3"></circle><line x1="12" y1="1" x2="12" y2="4"></line><line x1="12" y1="20" x2="12" y2="23"></line><line x1="1" y1="12" x2="4" y2="12"></line><line x1="20" y1="12" x2="23" y2="12"></line></svg>
+                    </div>
+                    <h3>Our Vision</h3>
+                    <p>To be a premier institution of excellence that empowers students with knowledge, integrity, and social responsibility, enabling them to excel in a dynamic global society and contribute meaningfully to the world.</p>
+                </div>
+
+                <!-- Mission -->
+                <div class="avm-card">
+                    <div class="avm-icon-wrapper mission-icon">
+                        <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"></path><line x1="4" y1="22" x2="4" y2="15"></line></svg>
+                    </div>
+                    <h3>Our Mission</h3>
+                    <p>To provide high-quality education through innovative teaching methodologies, state-of-the-art facilities, and a supportive environment that inspires intellectual curiosity and character building.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <style>
+        .about-vision-mission {
+            padding: 60px 0;
+            background: linear-gradient(135deg, #f8f9fc 0%, #ffffff 100%);
+        }
+        .avm-container {
+            width: 90%;
+            margin: auto;
+        }
+        .avm-row {
+            display: flex;
+            justify-content: center;
+            gap: 50px; /* You can change this value (e.g., 20px, 80px) to adjust the space! */
+            flex-wrap: wrap;
+        }
+        .avm-card {
+            flex: 1;
+            min-width: 260px;
+            background: #fff;
+            padding: 40px 25px;
+            border-radius: 20px;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+            transition: transform 0.4s ease, box-shadow 0.4s ease;
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+        }
+        .avm-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        }
+        .avm-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.4s ease;
+            z-index: -1;
+        }
+        .avm-card:nth-child(1)::before { background: linear-gradient(90deg, #4caf50, #2e7d32); }
+        .avm-card:nth-child(2)::before { background: linear-gradient(90deg, #2196f3, #1565c0); }
+        .avm-card:nth-child(3)::before { background: linear-gradient(90deg, #ff9800, #ef6c00); }
+        
+        .avm-card:hover::before {
+            transform: scaleX(1);
+        }
+        .avm-icon-wrapper {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 25px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+        }
+        .about-icon {
+            background: linear-gradient(135deg, #4caf50, #2e7d32);
+        }
+        .vision-icon {
+            background: linear-gradient(135deg, #2196f3, #1565c0);
+        }
+        .mission-icon {
+            background: linear-gradient(135deg, #ff9800, #ef6c00);
+        }
+        .avm-card h3 {
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 15px;
+            color: #333;
+        }
+        .avm-card p {
+            font-size: 15px;
+            color: #666;
+            line-height: 1.6;
+            font-weight: 400;
+        }
+        @media(max-width: 900px) {
+            .avm-card {
+                flex-basis: 100%;
+                margin-bottom: 30px;
+            }
+        }
+    </style>
+
     <!--Course of Collage-->
 
 
@@ -137,12 +326,12 @@
 
         <!--Footer-->
         <section class="footer">
-            <h4>About Us</h4>
-            <p>Study is the process of gaining knowledge, skills, and understanding through learning, practice, and dedication for personal growth and future success...</p>
             <p id="copyright">Developed By &#10084; Nagesh Rudraram</p>
         </section>
 
     <!--Javascript is Start-->
     <script src="javascript/main_script.js"></script>
+
+
 </body>
 </html>
