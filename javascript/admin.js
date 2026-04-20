@@ -49,15 +49,17 @@ function handleLogout() {
 
 async function fetchData(token) {
     try {
-        // Fetch Contacts
-        const contactRes = await fetch('/api/contact', {
-            headers: { 'Authorization': `Bearer ${token}` }
-        });
-        
-        // Fetch Admissions
-        const admissionRes = await fetch('/api/admission', {
-            headers: { 'Authorization': `Bearer ${token}` }
-        });
+        // Show loading state to provide immediate feedback to the user
+        const contactTbody = document.querySelector('#contactTable tbody');
+        const admissionTbody = document.querySelector('#admissionTable tbody');
+        if (contactTbody) contactTbody.innerHTML = '<tr><td colspan="5" style="text-align:center; padding: 20px; font-weight: bold; color: #555;">Loading contacts... please wait.</td></tr>';
+        if (admissionTbody) admissionTbody.innerHTML = '<tr><td colspan="8" style="text-align:center; padding: 20px; font-weight: bold; color: #555;">Loading admissions... please wait.</td></tr>';
+
+        // Fetch Contacts and Admissions in parallel to reduce wait time
+        const [contactRes, admissionRes] = await Promise.all([
+            fetch('/api/contact', { headers: { 'Authorization': `Bearer ${token}` } }),
+            fetch('/api/admission', { headers: { 'Authorization': `Bearer ${token}` } })
+        ]);
 
         if (contactRes.status === 401 || admissionRes.status === 401) {
             handleLogout();
