@@ -11,7 +11,11 @@ const contactSchema = mongoose.Schema({
     },
     phone: {
         type: String,
-        required: [true, 'Please add a phone or message context']
+        required: [true, 'Please add a phone number']
+    },
+    message: {
+        type: String,
+        required: [true, 'Please add a message']
     }
 }, {
     timestamps: true

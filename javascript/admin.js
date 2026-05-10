@@ -87,6 +87,7 @@ function populateContacts(contacts) {
             <td>${c.name}</td>
             <td>${c.email}</td>
             <td>${c.phone}</td>
+            <td>${c.message || 'N/A'}</td>
             <td>${new Date(c.createdAt).toLocaleString()}</td>
             <td>
                 <button onclick='openEditContact(${JSON.stringify(c).replace(/'/g, "&#39;")})' style="background:var(--primary); color:white; border:none; padding:5px 10px; border-radius:3px; cursor:pointer;" title="Edit">✏️</button>
@@ -168,6 +169,7 @@ function openEditContact(contact) {
     document.getElementById('editContactName').value = contact.name;
     document.getElementById('editContactEmail').value = contact.email;
     document.getElementById('editContactPhone').value = contact.phone;
+    document.getElementById('editContactMessage').value = contact.message || '';
     document.getElementById('editContactModal').classList.remove('hidden');
 }
 
@@ -176,7 +178,8 @@ async function saveContactEdit() {
     const data = {
         name: document.getElementById('editContactName').value,
         email: document.getElementById('editContactEmail').value,
-        phone: document.getElementById('editContactPhone').value
+        phone: document.getElementById('editContactPhone').value,
+        message: document.getElementById('editContactMessage').value
     };
     await updateRecord('contact', id, data);
     closeModals();

@@ -17,9 +17,9 @@ const getContacts = async (req, res, next) => {
 // @access  Public
 const createContact = async (req, res, next) => {
     try {
-        const { name, email, phone } = req.body;
+        const { name, email, phone, message } = req.body;
 
-        if (!name || !email || !phone) {
+        if (!name || !email || !phone || !message) {
             res.status(400);
             throw new Error('Please add all fields');
         }
@@ -27,7 +27,8 @@ const createContact = async (req, res, next) => {
         const contact = await Contact.create({
             name,
             email,
-            phone
+            phone,
+            message
         });
 
         res.status(201).json(contact);

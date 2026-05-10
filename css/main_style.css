@@ -293,137 +293,257 @@ h3{
 
 
 .campus{
-    width: 80%;
-    margin: auto;
+    width: 85%;
+    margin: 60px auto;
     text-align: center;
     padding-top: 50px;
 }
+.campus h1 {
+    font-family: bold, sans-serif;
+    font-size: 40px;
+    color: #111;
+    margin-bottom: 15px;
+    position: relative;
+    display: inline-block;
+}
+.campus h1::after {
+    content: '';
+    width: 60px;
+    height: 4px;
+    background: #ff0202;
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    border-radius: 3px;
+}
 .campus-col{
-    flex-basis: 32%;
-    border-radius: 10px;
+    flex-basis: 31%;
+    border-radius: 20px;
     margin-bottom: 30px;
     position: relative;
     overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
 }
 .campus-col img{
     width: 100%;
+    height: 100%;
+    object-fit: cover;
     display: block;
+    transition: transform 0.5s ease;
+}
+.campus-col:hover img {
+    transform: scale(1.1);
 }
 .layer{
-    background: transparent;
+    background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);
     height: 100%;
     width: 100%;
     position: absolute;
     top: 0%;
     left: 0%;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    padding-bottom: 30px;
+    opacity: 0.8;
     transition: 0.5s;
 }
-
 .layer:hover{
-    background: rgba(0, 245, 253, 0.534);
-
-    /* rgba(253, 0, 0, 0.7); */
+    background: linear-gradient(to top, rgba(255, 2, 2, 0.85), transparent);
+    opacity: 1;
 }
-
 .layer h3{
-    width: 100%;
-    font-weight: 500;
+    font-weight: 600;
     color: #fff;
     font-size: 26px;
-    bottom: 0%;
-    left: 50%;
-    transform: translate(-50%);
-    position: absolute;
+    transform: translateY(20px);
     opacity: 0;
-    transition: 0.5s;
+    transition: transform 0.5s ease, opacity 0.5s ease;
 }
-
 .layer:hover h3{
     opacity: 1;
-    bottom: 49%;
+    transform: translateY(0);
 }
 
 /* Facilities */
 
 .facilities{
-    width: 80%;
-    margin: auto;
+    width: 85%;
+    margin: 60px auto;
     text-align: center;
     padding-top: 50px;
 }
-
+.facilities h1 {
+    font-family: bold, sans-serif;
+    font-size: 40px;
+    color: #111;
+    margin-bottom: 10px;
+    position: relative;
+    display: inline-block;
+}
+.facilities h1::after {
+    content: '';
+    width: 60px;
+    height: 4px;
+    background: #ff0202;
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    border-radius: 3px;
+}
+.facilities > p {
+    color: #555;
+    font-size: 16px;
+    margin-bottom: 50px;
+    margin-top: 20px;
+}
 .facilities-col{
     flex-basis: 31%;
-    border-radius: 10px;
+    border-radius: 20px;
     margin-bottom: 5%;
     text-align: left;
+    background: #fff;
+    padding: 25px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+    transition: transform 0.4s ease, box-shadow 0.4s ease;
+    border: 1px solid #f9f9f9;
+}
+.facilities-col:hover{
+    transform: translateY(-15px);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
 }
 .facilities-col img{
     width: 100%;
-    border-radius: 10px;
-    transition: 0.5s;
+    border-radius: 15px;
+    margin-bottom: 20px;
+}
+.facilities-col h3{
+    margin-bottom: 15px;
+    font-size: 22px;
+    color: #222;
 }
 .facilities-col p{
-    padding: 0%;
-}
-
-.facilities-col h3{
-    margin-top: 16px;
-    margin-bottom: 15px;
-    text-align: left;
-}
-
-.facilities-col img:hover{
-    box-shadow: 3.5px 5px 15px 10px rgba(0, 0, 0, 0.308);
-}
-
-/* Call To Action */
-
-.ctn {
-    margin: 60px auto;
-    width: 50%;
-    background-image: linear-gradient(rgba(0,0,0,0.5),rgba(0,0,0,0.5)), url(../images/campus.png);
-    background-position: center;
-    background-size: contain;   /* shows full image */
-    background-repeat: no-repeat; /* prevents tiling */
-    border-radius: 20px;
-    text-align: center;
-    padding: 100px 0;
-    transition: 0.5s;
-}
-
-.ctn h1{
-    color: #fff;
-    margin-bottom: 40px;
+    color: #666;
+    line-height: 1.6;
     padding: 0;
 }
-/* .ctn:hover {
-    margin: 100px auto;
-    width: 80%;
-    background-image: linear-gradient(rgba(0,0,0,0.3),rgba(0,0,0,0.3)), url(../images/campus.png);
-    background-position: center;
-    background-size: contain;  
-    background-repeat: no-repeat;
-    border-radius: 10px;
-    padding: 100px 0;
-    box-shadow: 10px 10px 24px 0px rgba(0, 0, 0, 0.664);
-} */
+
 
 
 /* Footer */
 
 .footer{
     width: 100%;
-    text-align: center;
-    padding: 30px 0;
-    margin-top: -50px;
+    background: #0f172a;
+    color: #e2e8f0;
+    padding: 60px 0 20px;
+    font-family: sans-serif;
 }
 
-.footer h4{
-    margin-bottom: 25px;
-    margin-top: 20px;
+.footer-container {
+    width: 85%;
+    margin: 0 auto;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 40px;
+    margin-bottom: 40px;
+}
+
+.footer-col {
+    flex-basis: 28%;
+    min-width: 250px;
+    text-align: left;
+}
+
+.footer-col h3 {
+    font-size: 20px;
+    color: #ffffff;
+    margin-bottom: 20px;
     font-weight: 600;
-} 
+    position: relative;
+    display: inline-block;
+    text-align: left;
+}
+
+.footer-col h3::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: -8px;
+    width: 40px;
+    height: 3px;
+    background: #ff0202;
+    border-radius: 2px;
+}
+
+.footer-col p {
+    color: #94a3b8;
+    font-size: 14px;
+    line-height: 1.8;
+    margin-bottom: 15px;
+    padding: 0;
+}
+
+.footer-col ul {
+    list-style: none;
+    padding: 0;
+}
+
+.footer-col ul li {
+    margin-bottom: 12px;
+}
+
+.footer-col ul li a {
+    color: #94a3b8;
+    text-decoration: none;
+    font-size: 15px;
+    transition: color 0.3s ease, padding-left 0.3s ease;
+}
+
+.footer-col ul li a:hover {
+    color: #ff0202;
+    padding-left: 8px;
+}
+
+.social-links {
+    margin-top: 20px;
+    display: flex;
+    gap: 15px;
+}
+
+.social-links a {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    width: 36px;
+    height: 36px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 50%;
+    color: #fff;
+    text-decoration: none;
+    transition: background 0.3s ease, transform 0.3s ease;
+}
+
+.social-links a:hover {
+    background: #ff0202;
+    transform: translateY(-3px);
+}
+
+.footer-bottom {
+    text-align: center;
+    padding-top: 20px;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    width: 85%;
+    margin: 0 auto;
+}
+
+#copyright {
+    color: #64748b;
+    font-size: 14px;
+}
 
 /* Media query for responsive */
 
@@ -491,10 +611,7 @@ h3{
         box-shadow:none;
     }
 
-    /* Call To Action in Media query*/
-    .ctn h1{
-        font-size: 24px;
-    }
+
 }
 
 /* Media query is Close*/
