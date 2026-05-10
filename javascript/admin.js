@@ -82,16 +82,12 @@ function populateContacts(contacts) {
     tbody.innerHTML = '';
     
     contacts.forEach(c => {
-        // Fallback for older records where message was stored in phone field
-        const displayPhone = c.message ? c.phone : 'N/A';
-        const displayMessage = c.message ? c.message : c.phone;
-
         const tr = document.createElement('tr');
         tr.innerHTML = `
             <td>${c.name}</td>
             <td>${c.email}</td>
-            <td>${displayPhone}</td>
-            <td>${displayMessage}</td>
+            <td>${c.phone || 'N/A'}</td>
+            <td>${c.message || 'N/A'}</td>
             <td>${new Date(c.createdAt).toLocaleString()}</td>
             <td>
                 <button onclick='openEditContact(${JSON.stringify(c).replace(/'/g, "&#39;")})' style="background:var(--primary); color:white; border:none; padding:5px 10px; border-radius:3px; cursor:pointer;" title="Edit">✏️</button>
@@ -169,15 +165,11 @@ function closeModals() {
 
 // CONTACT EDIT
 function openEditContact(contact) {
-    // Fallback for older records where message was stored in phone field
-    const displayPhone = contact.message ? contact.phone : 'N/A';
-    const displayMessage = contact.message ? contact.message : contact.phone;
-
     document.getElementById('editContactId').value = contact._id;
     document.getElementById('editContactName').value = contact.name;
     document.getElementById('editContactEmail').value = contact.email;
-    document.getElementById('editContactPhone').value = displayPhone;
-    document.getElementById('editContactMessage').value = displayMessage;
+    document.getElementById('editContactPhone').value = contact.phone || '';
+    document.getElementById('editContactMessage').value = contact.message || '';
     document.getElementById('editContactModal').classList.remove('hidden');
 }
 
